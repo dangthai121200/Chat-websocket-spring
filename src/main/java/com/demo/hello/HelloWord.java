@@ -19,11 +19,11 @@ public class HelloWord {
 			factory.setHost("localhost");
 			Connection connection = factory.newConnection();
 			Channel channel = connection.createChannel();
+			channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
 			while(true) {
 				
 				Scanner scanner = new Scanner(System.in);
-				channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 				System.out.println("Nhập message: ");
 				String message = scanner.nextLine();
 				channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
